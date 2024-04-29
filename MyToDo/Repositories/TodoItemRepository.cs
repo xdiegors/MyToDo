@@ -1,9 +1,4 @@
 ﻿using MyToDo.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SQLite;
 
 namespace MyToDo.Repositories
@@ -22,7 +17,7 @@ namespace MyToDo.Repositories
                 return;
              }
 
-            var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             var databasePath = Path.Combine(documentPath, "TodoItems.db");
 
@@ -43,6 +38,7 @@ namespace MyToDo.Repositories
         {
             await CreateConnectionAsync();
             await connection.InsertAsync(item);
+            // TODO
             OnItemAdded?.Invoke(this, item);
         }
 
